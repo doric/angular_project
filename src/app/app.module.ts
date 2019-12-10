@@ -4,10 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { ConvertToListPipe } from './convert-to-list.pipe';
+import { UserRatingComponent } from '../../shared/user-rating/user-rating.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserListComponent,
+    ConvertToListPipe,
+    UserRatingComponent
   ],
   imports: [
     BrowserModule,

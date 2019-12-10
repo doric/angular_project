@@ -1,0 +1,107 @@
+<div class="ui icon message">
+
+  <i class="table icon"></i>
+
+  <div class="content">
+
+    <div class="header">
+
+      {{pageTitle}}
+
+    </div>
+
+    <p>Liste incluant la liste des compétences et le niveau global</p>
+
+  </div>
+
+</div>
+
+<div class="ui relaxed grid">
+
+  <div class="three column row">
+
+    <div class="column">
+
+      <button (click)="toggleRating()" class="ui primary button">
+        <span *ngIf="!showRating">Montrer les notes</span>
+        <span *ngIf="showRating">Cacher les notes</span>
+      </button>
+
+    </div>
+
+    <div class="column">
+
+      <div class="ui search">
+
+        <div class="ui icon input">
+
+          <input class="prompt" type="text" placeholder="Nom d'utilisateur..." [(ngModel)]="userFilter">
+
+          <i class="search icon"></i>
+
+        </div>
+
+        <div class="results"></div>
+
+      </div>
+
+    </div>
+
+    <div class="column">
+
+      <a class="ui image label">
+
+        Filtre : <img src="/assets/images/result.png">
+
+        {{ userFilter|uppercase }}
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+<div *ngIf="users && users.length >= 1">
+  <table class="ui celled table">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Nom</th>
+      <th>Age</th>
+      <th>Poste</th>
+      <th>Compétences</th>
+      <th *ngIf="showRating">Note</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of filteredUsers">
+      <td><img [width]="imageSize" src="{{user.userImage}}" title="{{ user.userName }}"/></td>
+      <td>{{ user.userName|uppercase }}</td>
+      <td>{{ user.userAge }}</td>
+      <td>{{ user.userJob }}</td>
+      <td [outerHTML]="user.userSkills|convertToList"></td>
+      <td *ngIf="showRating">{{ user.userRating }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="!users || users.length < 1" class="ui  error  message">
+
+  <i class="close  icon"></i>
+
+  <div class="header">
+
+    Aucun utilisateur disponible.
+
+  </div>
+
+  <ul class="list">
+
+    <li>Modifier votre recherche.</li>
+
+    <li>Contacter votre administrateur.</li>
+
+  </ul>
+
+</div>
